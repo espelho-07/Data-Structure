@@ -1,6 +1,7 @@
 // WAP to determine whether the entered character is vowel or not.
 
 #include <stdio.h>
+
 #include <ctype.h> // For isalpha()
 
 int main()
@@ -31,3 +32,5 @@ int main()
 
     return 0;
 }
+
+// The Time Complexity In This Code Is:: n  O(n)

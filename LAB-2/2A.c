@@ -3,6 +3,7 @@
 // USING LOOPS
 
 #include <stdio.h>
+
 int main()
 {
     int fact = 1;
@@ -25,6 +26,6 @@ int main()
     return 0;
 }
 
+// The Time Complexity In This Code Is:: n  O(n)
 
-
-//USING RECURSION
+// USING RECURSION

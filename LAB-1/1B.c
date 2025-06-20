@@ -1,6 +1,7 @@
 // WAP to find whether a number is odd or even.
 
 #include <stdio.h>
+
 int main()
 {
     int Num;
@@ -21,3 +22,5 @@ int main()
 
     return 0;
 }
+
+// The Time Complexity In This Code Is:: n  O(n)
