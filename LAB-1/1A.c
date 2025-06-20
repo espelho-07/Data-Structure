@@ -1,19 +1,21 @@
-//WAP to calculate area of a Circle (A = πr2). 
+// WAP to calculate area of a Circle (A = πr2).
 
-#include<stdio.h>
-
-void main(){
+#include <stdio.h>
+int main()
+{
     float radius;
+    float PI = 3.14;
     float area;
-    float PI=3.14;
 
-    printf("Enter The Radius Of Circle\n");
-    scanf("%f",&radius);
+    // Asking The Radius And Storing It
+    printf("Enter The Radius Of Circle::\n");
+    scanf(" %f", &radius);
 
-    area = PI * radius * radius;
+    // Area Formula
+    area = radius * radius * PI;
 
-    printf("The area of the circle is: %.2f\n", area);
+    // Printing The Area
+    printf("The Area Of Circle Is::%.2f\n", area);
 
     return 0;
-
 }

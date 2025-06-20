@@ -1,19 +1,23 @@
-//WAP to find whether a number is odd or even.
+// WAP to find whether a number is odd or even.
 
-#include<stdio.h>
-void main(){
+#include <stdio.h>
+int main()
+{
     int Num;
-    
-    printf("Enter The Number You want To Check\n");
-    scanf("%d",&Num);
 
-    if (Num%2==0)
+    // Asking The Number
+    printf("Enter The Number You Want To Check::\n");
+    scanf(" %d", &Num);
+
+    // Logic Of Checking The Number[EVEN or ODD]
+    if (Num % 2 == 0)
     {
-        printf("The Entered Number Is EVEN\n");
-    }else
-    {
-        printf("The Entered Number Is ODD\n");
+        printf("The Number You Entered Is 'EVEN'\n");
     }
-    
+    else
+    {
+        printf("The Number You Entered Is 'ODD'\n");
+    }
+
     return 0;
 }

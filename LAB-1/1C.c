@@ -1,20 +1,33 @@
-//WAP to determine whether the entered character is vowel or not. 
+// WAP to determine whether the entered character is vowel or not.
 
-#include<stdio.h>
-void main(){
+#include <stdio.h>
+#include <ctype.h> // For isalpha()
+
+int main()
+{
     char c;
 
-    printf("Enter The Character\n");
-    scanf("%c", &c);
+    // Asking The Character From The User
+    printf("Enter The Character You Want To Check::\n");
+    scanf(" %c", &c);
 
-    if (c=='a' || c=='e' || c=='i' || c=='o' || c=='u' || c=='A' || c=='E' || c=='I' || c=='O' || c=='U')
+    //- isalpha(input) checks if the input is a letter (A-Z, a-z).
+    if (isalpha(c))
     {
-        printf("The Entered Character Is VOWEL\n");
+        // Logic Of Vowel Number
+        if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' || c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U')
+        {
+            printf(" The Character You Entered Is A 'VOWEL'\n");
+        }
+        else
+        {
+            printf(" The Character You Entered Is'NOT VOWEL'\n");
+        }
     }
     else
     {
-        printf("The Entered Character Is NOT VOWEL\n");
+        printf("Invalid input! Please enter letters only.\n");
     }
-    
+
     return 0;
 }
