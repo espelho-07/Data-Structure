@@ -3,30 +3,30 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct node
-{
+// Define a node structure
+struct node {
     int info;
     struct node *Link;
-    ;
 };
 
-struct node *first = NULL;
+struct node *first = NULL;  // Pointer to the first node
 
-struct node *newnode(int info)
-{
+// Function to create a new node
+struct node *newnode(int info) {
     struct node *newnode = (struct node *)malloc(sizeof(struct node));
     newnode->info = info;
     newnode->Link = NULL;
     return newnode;
 }
 
-void main()
-{
+int main() {
     int info;
-    printf("Enter A Number :\n");
-    scanf("%d",&info);
-    struct node *first=newnode(info);
-    printf("Data Inside This Node Is %d",first->info);
-    free(first);
+    printf("Enter a number:\n");
+    scanf("%d", &info);
 
+    first = newnode(info);  // Assign to global 'first'
+    printf("Data inside this node is: %d\n", first->info);
+
+    free(first);  // Free memory after use
+    return 0;
 }
