@@ -1,6 +1,7 @@
 {
     "files.associations": {
-        "4A.C": "cpp"
+        "4A.C": "cpp",
+        "type_traits": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
