@@ -1,3 +1,5 @@
+//Insert At First In Single Linear Linked List
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -25,10 +27,6 @@ int main()
 
     // Display the value of the first node after insertion
     printf("Element inserted at beginning: %d\n", first->info);
-
-
-    
-
     return 0;
 }
 
