@@ -1,31 +1,249 @@
-int choice , data , position;
-while (1)
+/* Write a menu driven program to implement following operations on the singly
+linked list.
+• Insert a node at the front of the linked list.
+• Display all nodes.
+• Delete a first node of the linked list.
+• Insert a node at the end of the linked list.
+• Delete a last node of the linked list.
+• Delete a node from specified position.
+• count the number of nodes*/
+
+// Write a program to implement a node structure for singly linked list. Read the data in a node, print the node.
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// Define the structure of a node
+struct node
 {
-    printf("Enter 1 for Insert At Null");
-    scanf("%d",&choice);
-    printf("Enter 2 for Insert At Null");
-    scanf("%d",&choice);
-    printf("Enter 3 for Insert At Null");
-    scanf("%d",&choice);
-    printf("Enter 4 for Insert At Null");
-    scanf("%d",&choice);
-    printf("Enter 5 for Insert At Null");
-    scanf("%d",&choice);
-    printf("Enter 6 for Insert At Null");
-    scanf("%d",&choice);
-    printf("Enter 7 for Insert At Null");
-    scanf("%d",&choice);
-    printf("Enter 8 for Insert At Null");
-    scanf("%d",&choice);
-    switch (choice)
+    int info;          // This stores the data value
+    struct node *link; // This points to the next node
+};
+
+struct node *first = NULL; // Points to the first node (head) of the list
+
+// Function declarations
+struct node *insertAtFront(int);
+void display();
+struct node *deleteAtFront();
+struct node *insertAtEnd(int);
+struct node *deleteAtEnd();
+struct node *deleteAtPosition(int);
+int countNodes();
+
+int main()
+{
+    int choice, data, pos;
+
+    while (1)
     {
-    case 1:
-        printf("Enter The Element U Want to Insert");
-        scanf("%d",&data);
-        first = insertAtFront(data);
-        break;
-    
-    default:
-        break;
+        // Display Options (Menu)
+
+        printf("1. Insert at Front\n");
+
+        printf("2. Display All Nodes\n");
+
+        printf("3. Delete First Node\n");
+
+        printf("4. Insert at End\n");
+
+        printf("5. Delete Last Node\n");
+
+        printf("6. Delete from Position\n");
+
+        printf("7. Count Nodes\n");
+
+        printf("8. Exit\n");
+
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        // Using Switch Case For Going Through The Case That User Wants
+        switch (choice)
+        {
+        case 1:
+            printf("Enter data to insert: ");
+            scanf("%d", &data);
+            first = insertAtFront(data);
+            break;
+        case 2:
+            display();
+            break;
+        case 3:
+            first = deleteAtFront();
+            break;
+        case 4:
+            printf("Enter data to insert: ");
+            scanf("%d", &data);
+            first = insertAtEnd(data);
+            break;
+        case 5:
+            first = deleteAtEnd();
+            break;
+        case 6:
+            printf("Enter position to delete from: ");
+            scanf("%d", &pos);
+            first = deleteAtPosition(pos);
+            break;
+        case 7:
+            printf("Total nodes: %d\n", countNodes());
+            break;
+        case 8:
+            return;
+        default:
+            printf("Invalid choice! Please Select Valid  Options.\n");
+            break;
+        }
     }
+    return 0;
+}
+
+// Insert a node at the beginning of the list
+struct node *insertAtFront(int data)
+{
+    struct node *newNode = (struct node *)malloc(sizeof(struct node)); // Allocate new node
+    newNode->info = data;                                              // Inserting The Value In NewNode
+    newNode->link = NULL;                                             // Point to current first node
+    if (first == NULL)
+    {
+        printf("Your List Is Empty,Inserting New Node\n");          //Checking If List Is Null Or Not
+        first = newNode;                                           //Now Newnode Will be First Node
+        return first;                                             //return the first
+    }
+    else
+    {
+        newNode->link = first;       //NewNode Will Point To First
+        first = newNode;            //Now Newnode Will be First Node
+        return first;              //return the first
+    }
+}
+
+// Display all nodes in the list
+void display()
+{
+    struct node *save = first;
+    if (save == NULL)
+    {
+        printf("List is empty\n");
+        return;
+    }
+    printf("List: ");
+    while (save != NULL)
+    {
+        printf("%d -> ", save->info);
+        save = save->link;
+    }
+    printf("NULL\n");
+}
+
+// Delete the first node from the list
+struct node *deleteAtFront()
+{
+    if (first == NULL)
+    {
+        printf("List is empty\n");
+        return NULL;
+    }
+    struct node *save = first; // Pointer to the node to be deleted(Temporary Variable save Which Points To FIRST)
+    first = first->link;       // Move head to next node
+    free(save);                // Free memory of old first node
+    return first;
+}
+
+// Insert a node at the end of the list
+struct node *insertAtEnd(int data)
+{
+    struct node *newNode = (struct node *)malloc(sizeof(struct node));
+    newNode->info = data;
+    newNode->link = NULL;
+
+    if (first == NULL)
+    {
+        return newNode; // If list is empty, new node becomes the first node
+    }
+
+    struct node *save = first;
+    while (save->link != NULL)
+    {
+        save = save->link;
+    }
+    save->link = newNode; // Link the last node to the new node
+    return first;
+}
+
+// Delete the last node from the list
+struct node *deleteAtEnd()
+{
+    if (first == NULL)
+    {
+        printf("List is empty\n");
+        return NULL;
+    }
+    else if (first->link == NULL)
+    {
+        free(first); // If only one node, free it
+        return NULL;
+    }
+
+    struct node *save = first;
+    struct node *pred = NULL;
+
+    while (save->link != NULL)
+    {
+        pred = save;
+        save = save->link;
+    }
+
+    pred->link = NULL; // Making the last node NULL
+    free(save);        // Free memory of last node
+    return first;
+}
+
+// Delete node from a specified position
+struct node *deleteAtPosition(int pos)
+{
+    if (first == NULL)
+    {
+        printf("List is empty\n");
+        return NULL;
+    }
+
+    if (pos == 1)
+    {
+        return deleteAtFront(); // Using delete At Front Again
+    }
+
+    struct node *save = first;  //Here save Will Point To first
+    struct node *pred = NULL;  //Here Pred Is NULL (Predessor)
+    int i = 1;
+
+    while (save != NULL && i < pos)
+    {
+        pred = save;
+        save = save->link;
+        i++;
+    }
+
+    if (save == NULL)
+    {
+        printf("Position out of bounds\n");
+        return first;
+    }
+
+    pred->link = save->link; // Skip over the node to be deleted
+    free(save);              // Free memory
+    return first;
+}
+
+// Count total nodes in the list
+int countNodes()
+{
+    struct node *save = first;
+    int count = 0;
+    while (save != NULL)
+    {
+        count++;
+        save = save->link;
+    }
+    return count;
 }
