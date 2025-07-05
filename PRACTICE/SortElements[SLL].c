@@ -19,11 +19,6 @@ struct node * sortLinkedList(struct node * first)
     {
         struct node * save = first;
         struct node * temp = first;
-
-        while (save->info > temp->info)
-        {
-            whi
-        }
         
     }
     

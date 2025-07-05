@@ -1,111 +1,108 @@
-//Queue Using Linked List
-//As Queue Means First in Woul be first out so for that insert at first and delte at end.
-
-// Insert At First
+// Queue Using Linked List
+// As Queue Means First in Woul be first out so for that insert at first and delte at end.
 
 #include <stdio.h>
 #include <stdlib.h>
-// Declaring Structure of Node
+
 struct node
 {
     int info;
     struct node *link;
 };
 
-// Declaring Insert At First Function
-struct node *insertAtFirst(int x, struct node *first)
+// Function To Create New Linked List
+struct node *inqueue(int firstNode, int noOfNodes, int restNodes, struct node *First)
 {
-    // Creating Memory For New Node
+    // Assigning Memory
     struct node *newNode = (struct node *)malloc(sizeof(struct node));
-    // Assigning The Value
-    newNode->info = x;
-    newNode->link = first;
-    // Checking Is List Empty
-    if (first == NULL)
+    // For First Node
+    newNode->info = firstNode;
+    newNode->link = NULL;
+    First = newNode;
+    // Declaring Save=first Fore Input of Rest of Nodes
+    struct node *Save = First;
+    // For Rest Of The Nodes
+    for (int i = 2; i <= noOfNodes; i++)
     {
-        printf("Your List Is Empty.So Your NewNode Will Be Your FIRST Node\n");
-        first = newNode;
+        struct node *newNode = (struct node *)malloc(sizeof(struct node));
+        // Input For Rest Of Nodes
+        printf("The %d Node IS::\n", i);
+        scanf(" %d", &restNodes);
+        // Assigning Values
+        newNode->info = restNodes;
+        newNode->link = NULL;
+        Save->link = newNode;
+        Save = newNode;
     }
-    else
-    {
-        first = newNode;
-        return first;
-    }
+    return First;
 }
-
-/Function For Delete At Last
-struct node * deleteAtLast(struct node * first)
+// Function To Delete At First
+struct node *dequeue(struct node *first)
 {
     if (first == NULL)
     {
-        printf("Nothing To Delete!! Linked Listv Is Empty.\n");
+        printf("Your Linked List Is Empty.Nothing To DELETE!!!");
     }
     else
     {
-        struct node * save = first;
-        struct node * pred = NULL;
-
-        while (save->link != NULL)
-        {
-            pred=save;
-            save=save->link;
-        }
+        struct node *save = first;
+        first = first->link;
         printf("Deleted node with value %d\n", save->info);
-        pred->link=NULL;
         free(save);
         return first;
     }
 }
 
-// Function to print the linked list
-void printList(struct node *save)
+// Function To display
+void displayLinkedList(int noOfNodes, struct node *First)
 {
-    printf("Current Linked List: ");
-    while (save != NULL)
+    if (First == NULL)
     {
-        printf("%d -> ", save->info);
-        save = save->link;
+        printf("The List Is Empty");
     }
-    printf("NULL\n");
+    struct node *display = First;
+    for (int i = 1; i <= noOfNodes; i++)
+    {
+        printf("Node %d: %d\n", i, display->info);
+        display = display->link;
+    }
 }
 
-// main method
+// Main Method
 int main()
 {
-    // Declaring X
-    int x;
-    // Declaring First
-    struct node *first = NULL;
-    // Sample Linked List
-    struct node *second, *third, *fourth;
-    first = (struct node *)malloc(sizeof(struct node));
-    second = (struct node *)malloc(sizeof(struct node));
-    third = (struct node *)malloc(sizeof(struct node));
-    fourth = (struct node *)malloc(sizeof(struct node));
+    struct node *First = NULL;
+    int noOfNodes, firstNode, restNodes, choice;
 
-    first->info = 2;
-    first->link = second;
+    for (int i = 1; i > 0; i++)
+    {
+        // Asking Choice
+        printf("Enter Your Choice -\n 1- TO INQUEUE \n 2- TO DEQUEUE\n 3- To DISPLAY\n");
+        scanf(" %d", &choice);
+        if (choice == 1)
+        {
+            // Asking No. of nodes
+            printf("Enter The Number Of Nodes You want In Linked List::\n");
+            scanf(" %d", &noOfNodes);
 
-    second->info = 4;
-    second->link = third;
+            // Asking About First Node
+            printf("Enter The Data Of First Node::\n");
+            scanf(" %d", &firstNode);
 
-    third->info = 6;
-    third->link = fourth;
-
-    fourth->info = 8;
-    fourth->link = NULL;
-
-    // Display original list
-    printList(first);
-
-    // Asking Value Of First Node
-    printf("Enter Value Of X The Data Of Node You Want To Insert At First::\n");
-    scanf(" %d", &x);
-    
-    // Calling Function
-    first = insertAtFirst(x, first);
-
-    // Display Current list
-    printList(first);
-
+            First = inqueue(firstNode, noOfNodes, restNodes, First);
+        }
+        else if (choice == 2)
+        {
+            First = dequeue(First);
+        }
+        else if (choice == 3)
+        {
+            displayLinkedList(noOfNodes, First);
+        }
+        else
+        {
+            printf("Enter Valid Choice From 1 And 2\n");
+            exit(1);
+        }
+    }
 }

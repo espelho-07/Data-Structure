@@ -63,6 +63,11 @@ struct node *pop(struct node *First)
 // Function To display
 void displayLinkedList(int noOfNodes, struct node *First)
 {
+    if (First == NULL)
+    {
+        printf("The List Is Empty");
+    }
+    
     struct node *display = First;
     for (int i = 1; i <= noOfNodes; i++)
     {
@@ -80,7 +85,7 @@ int main()
     for (int i = 1; i > 0; i++)
     {
         // Asking Choice
-        printf("Enter Your Choice -\n 1- TO PUSH \n 2- TO POP\n");
+        printf("Enter Your Choice -\n 1- TO PUSH \n 2- TO POP\n 3- DISPLAY\n");
         scanf(" %d", &choice);
         if (choice == 1)
         {
@@ -98,12 +103,14 @@ int main()
         {
             First = pop(First);
         }
+        else if (choice == 3)
+        {
+            displayLinkedList(noOfNodes, First);
+        }
         else
         {
             printf("Enter Valid Choice From 1 And 2\n");
             exit(1);
         }
     }
-
-    displayLinkedList(noOfNodes, First);
 }
