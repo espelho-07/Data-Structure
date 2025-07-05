@@ -1,0 +1,3 @@
+insert at first in clll
+stack queue
+linked list equality
