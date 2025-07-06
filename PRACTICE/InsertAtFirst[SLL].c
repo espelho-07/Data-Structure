@@ -31,8 +31,9 @@ struct node *insertAtFirst(int x, struct node *first)
 }
 
 // Function to print the linked list
-void printList(struct node *save)
+void printList(struct node *first)
 {
+    struct node * save = first;
     printf("Current Linked List: ");
     while (save != NULL)
     {
