@@ -36,6 +36,7 @@ struct node *sortLinkedList(struct node *First) {
     struct node *i, *j;
     int temp;
 
+    //Bubble Sort Logic
     for (i = First; i != NULL; i = i->link) {
         for (j = i->link; j != NULL; j = j->link) {
             if (i->info > j->info) {

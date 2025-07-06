@@ -1,4 +1,4 @@
-// Insert At First
+// Insert At Last
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,7 +9,9 @@ struct node
     struct node *link;
 };
 
-struct node *insertAtFirst(int x, struct node *first, struct node *last)
+struct node *last = NULL;
+
+struct node *insertAtLast(int x, struct node *first)
 {
     struct node *newNode = (struct node *)malloc(sizeof(struct node));
     newNode->info = x;
@@ -18,22 +20,23 @@ struct node *insertAtFirst(int x, struct node *first, struct node *last)
     {
         printf("Your Linked List Is Empty\n");
         newNode->link = newNode;
+        last = newNode;
         return newNode;
     }
     else
     {
         last->link = newNode;
         newNode->link = first;
-        first = newNode;
+        last = newNode;
         return first;
     }
 }
 // Function to print the linked list
-void printList(struct node *first, struct node *last)
+void printList(struct node *first)
 {
     if (first == NULL)
     {
-        printf("The Linked List Is Empty!!");
+        printf("The Linked List Is Empty!!\n");
     }
     else
     {
@@ -44,6 +47,7 @@ void printList(struct node *first, struct node *last)
             printf("%d -> ", save->info);
             save = save->link;
         }
+        // Print the last node
         printf("%d (back to start)\n", save->info);
     }
 }
@@ -55,7 +59,7 @@ int main()
     int x;
     // Declaring First
     struct node *first = NULL;
-    struct node *last = NULL;
+
     // Sample Linked List
     struct node *second, *third, *fourth;
     first = (struct node *)malloc(sizeof(struct node));
@@ -77,15 +81,15 @@ int main()
     last = fourth;
 
     // Display original list
-    printList(first, last);
+    printList(first);
 
     // Asking Value Of First Node
-    printf("Enter Value Of X The Data Of Node You Want To Insert At First::\n");
+    printf("Enter Value Of X The Data Of Node You Want To Insert At Last::\n");
     scanf(" %d", &x);
 
     // Calling Function
-    first = insertAtFirst(x, first, last);
+    first = insertAtLast(x, first);
 
     // Display Current list
-    printList(first, last);
+    printList(first);
 }
