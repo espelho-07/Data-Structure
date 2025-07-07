@@ -28,11 +28,7 @@ struct node *insertAtFront(struct node *first, int x, struct node *last)
     }
     else
     {
-        struct node *save = first;
-        while (save != first)
-        {
-            save = save->link;
-        }
+
         newNode->link = last->link;
         last->link = newNode;
         first = newNode;
@@ -62,6 +58,27 @@ struct node *deleteAtSpecific(struct node * first , int position , int count)
     
 }
 
+struct node *insertAtLast(struct node *first, int x, struct node *last)
+{
+    struct node *newNode = (struct node *)malloc(sizeof(struct node));
+    newNode->info = x;
+    newNode->link = NULL;
+    if (first == NULL)
+    {
+        printf("Your Linked List Is Empty!! Your Newnode Will Be Your first Node And Last Node Itself.\n");
+        newNode->link = newNode;
+        last = newNode;
+        return first;
+    }
+    else
+    {
+        newNode->link = last->link;
+        last->link = newNode;
+        last = newNode;
+        return first;
+    }
+}
+
 
 
 void displayCircularLinkedList(struct node *first)
@@ -85,13 +102,12 @@ void displayCircularLinkedList(struct node *first)
 
 int main()
 {
-    int x;
-    int count=1;
-    int i;
-    int position;
+    int choice, x, position;
+    int count = 1;
     struct node *first = NULL;
     struct node *last = NULL;
-    // Sample Linked List
+
+    // Sample initialization (optional; remove if starting from empty list)
     struct node *second, *third, *fourth;
     first = (struct node *)malloc(sizeof(struct node));
     second = (struct node *)malloc(sizeof(struct node));
@@ -111,21 +127,54 @@ int main()
     fourth->link = first;
     last = fourth;
 
-    // Display original list
-    displayCircularLinkedList(first);
+   while (1)
+{
+    printf("\n====== Circular Linked List Menu ======\n");
+    printf("1. Insert at Front\n");
+    printf("2. Insert at End\n");
+    printf("3. Delete at Specific Position\n");
+    printf("4. Display List\n");
+    printf("5. Exit\n");
+    printf("Enter your choice: ");
+    scanf("%d", &choice);
 
-    // Asking Value Of First Node
-   // printf("\nEnter Value Of X The Data Of Node You Want To Insert At First::\n");
-    //scanf(" %d", &x);
+    switch (choice)
+    {
+    case 1:
+        printf("Enter value to insert at front: ");
+        scanf("%d", &x);
+        first = insertAtFront(first, x, last);
+        if (last == NULL)
+            last = first;
+        displayCircularLinkedList(first);
+        break;
 
-    printf("\nEnter Value Of X The Node You Want To Delete::\n");
-    scanf(" %d", &position);
+    case 2:
+        printf("Enter value to insert at end: ");
+        scanf("%d", &x);
+        first = insertAtLast(first, x, last);
+        if (last == NULL)
+            last = first;
+        displayCircularLinkedList(first);
+        break;
 
-    // Calling Function
-    //first = insertAtFront(first, x, last);
+    case 3:
+        printf("Enter position to delete (starting at 1): ");
+        scanf("%d", &position);
+        deleteAtSpecific(first, position, 1); // Initial count = 1
+        displayCircularLinkedList(first);
+        break;
 
-    deleteAtSpecific(first , position ,count);
+    case 4:
+        displayCircularLinkedList(first);
+        break;
 
-    // Display Current list
-    displayCircularLinkedList(first);
+    case 5:
+        printf("Exiting program. Bye!\n");
+        exit(0);
+
+    default:
+        printf("Invalid choice! Try again.\n");
+    }
+}
 }
