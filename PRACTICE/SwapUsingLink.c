@@ -9,27 +9,24 @@ struct node
     struct node *link;
 };
 
-// Declaring Insert At First Function
-struct node *insertAtFirst(int x, struct node *first)
+struct node *deleteAtPosition(int x, struct node *first, int i)
 {
-    // Creating Memory For New Node
-    struct node *newNode = (struct node *)malloc(sizeof(struct node));
-    // Assigning The Value
-    newNode->info = x;
-    newNode->link = first;
-    // Checking Is List Empty
     if (first == NULL)
     {
-        printf("Your List Is Empty.So Your NewNode Will Be Your FIRST Node\n");
-        first = newNode;
+        printf("Your Linked List Is Empty\n");
     }
-    else
+    struct node *save = first;
+    struct node *pred = NULL;
+    while (i != x && save->link != first)
     {
-        first = newNode;
-        return first;
+        pred = save;
+        save = save->link;
+        i++;
     }
+    pred->link = save->link;
+    free(save);
 }
-
+u look so sexy
 // Function to print the linked list
 void printList(struct node *first)
 {
@@ -77,7 +74,7 @@ int main()
     printList(first);
 
     // Asking Value Of First Node
-    printf("Enter Value Of X The Data Of Node You Want To Insert At First::\n");
+    printf("Enter Value Of X The Position Of Node You Want To Swap ::\n");
     scanf(" %d", &x);
     
     // Calling Function
