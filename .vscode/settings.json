@@ -2,7 +2,8 @@
     "files.associations": {
         "4A.C": "cpp",
         "type_traits": "c",
-        "16A.C": "cpp"
+        "16A.C": "cpp",
+        "17A.C": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
