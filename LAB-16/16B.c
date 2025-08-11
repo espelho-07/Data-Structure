@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Define the structure for a Node
+// Define the structure for a tree node
 struct Node
 {
     int data;
@@ -9,7 +9,7 @@ struct Node
     struct Node *right;
 };
 
-// Create a new Node
+// Function to create a new node
 struct Node *createNode(int data)
 {
     struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
@@ -18,26 +18,19 @@ struct Node *createNode(int data)
     return newNode;
 }
 
-// Insert a Node in Tree
+// Insert a node into the binary tree
 struct Node *insert(struct Node *root, int data)
 {
     if (root == NULL)
-    {
-        printf("Tree is empty or reached leaf. Inserting new Node...\n");
         return createNode(data);
-    }
     if (data < root->data)
-    {
         root->left = insert(root->left, data);
-    }
-    else if (data > root->data)
-    {
+    else
         root->right = insert(root->right, data);
-    }
     return root;
 }
 
-// Inorder Traversal in Tree
+// In-order traversal of the tree
 void inorder(struct Node *root)
 {
     if (root != NULL)
@@ -48,19 +41,47 @@ void inorder(struct Node *root)
     }
 }
 
-// Main Method
+// Compare two trees for equality
+int areSame(struct Node *tree1, struct Node *tree2)
+{
+    if (tree1 == NULL && tree2 == NULL)
+        return 1;
+    if (tree1 == NULL || tree2 == NULL)
+        return 0;
+    return (tree1->data == tree2->data) &&
+           areSame(tree1->left, tree2->left) &&
+           areSame(tree1->right, tree2->right);
+}
+
 int main()
 {
-    struct Node *root = NULL;
-    int data;
+    // Tree 1
+    struct Node *tree1 = NULL;
+    tree1 = insert(tree1, 10);
+    insert(tree1, 5);
+    insert(tree1, 15);
 
-    printf("Enter data to insert: ");
-    scanf("%d", &data);
-    root = insert(root, data);
+    // Tree 2
+    struct Node *tree2 = NULL;
+    tree2 = insert(tree2, 20);
+    insert(tree2, 18);
+    insert(tree2, 25);
 
-    printf("Inorder Traversal: ");
-    inorder(root);
-    printf("\n");
+    // Print both trees
+    printf("Tree 1 (In-order): ");
+    inorder(tree1);
+
+    printf("Tree 2 (In-order): ");
+    inorder(tree2);
+
+    if (areSame(tree1, tree2))
+    {
+        printf("The Given Tree Is Same\n");
+    }
+    else
+    {
+        printf("The Given Tree Is Not Same \n");
+    }
 
     return 0;
 }
