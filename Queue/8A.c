@@ -58,9 +58,10 @@ void deQueue()
 
 void displayQueue()
 {
+    F=0,R=4;
     for (int i = F; i <= R; i++)
     {
-        printf("The %d Element in Queue Is -\n", i + 1);
+        printf("The %d Element in Queue Is - %d\n", i + 1,Q[i]);
     }
 }
 
