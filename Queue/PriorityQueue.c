@@ -1,116 +1,90 @@
-// Write a menu driven program to implement following operations on the Queue
-// using an Array
-// • E5QUEUE
-// • DEQUEUE
-// • DISPLAY
+#include<stdio.h>
 
-// 5 - no. of elements in array
-//  noToInsert- no. to insert in array
-//  f- front from where deletion occours
-//  r- rear from where deletion occours
-//  q- is our queue
+int s = 70;
+char queue[s];
+int f = -1;
+int r = -1;
 
-#include <stdio.h>
-#include<stdlib.h>
-
-struct PriorityQueue
-{
-     int priority;
-     int value;
+struct priority{
+    int priority;
+    int value;
 };
 
 
-int Q[5] = {3,4,5};
-int F = -1;
-int R = -1;
-
-void enQueue(int numberToInsert , int PriorityQueue)
-{
-    if (R > 5)
-    {
-        printf("Queue Overflow");
+void enqueue(int n ,int pri){
+    if (r >= n){
+        printf("Queue Owerflow");
         return;
     }
-    else
-    {
-        R = R + 1;
-        Q[R] = numberToInsert;
-        if (F = -1)
-        {
-            F = 0;
-        }
+    r++;
+    queue[r].value = n;
+    queue[r].priority = pri;
+    if (f == -1){
+        f = 0;
     }
 }
 
-void deQueue()
-{
-    if (R < F)
-    {
-        printf("Queue UnderFlow");
+void dequeue(){
+    if (f < 0){
+        printf("Queue Underflow");
         return;
     }
-    else
-    {
-        if (F = R)
-        {
-            F = R = 0;
+    else {
+        int temp;
+        if (f == r){
+            temp = queue[f];
+            r = -1;
+            f = -1;
+            return temp;
         }
-        else
-        {
-            F = F + 1;
+        int index = 0;
+        temp = queue[f].priority
+        for (int i = f ;i <= r ;i++){
+            if (temp < queue[i].priority){
+                temp = queue[i].priority;
+                index = i;
+            }
         }
+        for (int i = index ;i <= r-1 ;i++){
+            queue[i] = queue[i+1];
+        }
+        r--;
+        return temp;
     }
 }
 
-void displayQueue()
-{
-    for (int i = F; i <= R; i++)
-    {
-        printf("The %d Element in Queue Is -\n", i + 1);
+void display(){
+    for (int i = f ;i <= r ;i++){
+        printf("%d\t",queue[i]);
     }
 }
 
-int main()
-{
-    int numberToInsert;
-    int choice;
-    while (1)
-    {
-        // Display menu
-        printf("\n--- Menu ---\n");
-        printf("1. EnQueue\n");
+void main(){
+    int choice ,priority ,value;
+    while(1){
+        printf("\nEnter 1 to enqueue value");
+        printf("\nEnter 2 to dequeue value");
+        printf("\nEnter 3 to display queue");
+        printf("\nEnter 4 to exit program");
+        printf("\nEnter your choice : ");
+        scanf("%d",&choice);
+        switch (choice){
+        case 1: printf("Enter value and priority : ");
+                scanf("%d %d",&value,&priority);
+                enqueue(value ,priority);
+                break;
 
-        printf("2. DeQueue\n");
+        case 2: printf("Value we get is %d.",dequeue());
+                break;
 
-        printf("3. Display\n");
+        case 3: display();
+                break;
 
-        printf("4. Exit\n");
-
-        printf("Enter your choice: ");
-
-        scanf("%d", &choice);
-
-        // Handle user choice
-        switch (choice)
-        {
-        case 1:
-            printf("Enter Number to EnQueue: ");
-            scanf("%d", &numberToInsert);
-            enQueue(numberToInsert);
-            break;
-        case 2:
-            deQueue();
-            break;
-
-        case 3:
-           displayQueue();
-            break;
-
-        case 4:
-            exit(0);
-        default:
-            printf("Invalid choice! Try again.\n");
+        case 4: return;
+                break;
+        
+        default: printf("Invalid choice!");
+                 break;
         }
     }
-    return 0;
 }
