@@ -1,4 +1,4 @@
-// Write a program to implement Bubble using Array.
+// Write a program to implement Selection Sort using Array.
 
 #include <stdio.h>
 int main()
@@ -28,19 +28,8 @@ int main()
     }
     
 
-    // Bubble Sort LOgic
-    for (int i = 0; i < N; i++)
-    {
-        for (int j = i+1; j < N; j++)
-        {
-            if (array[i] > array[j])
-            {
-                temp = array[i];
-                array[i] = array[j];
-                array[j] = temp;
-            }
-        }  
-    }
+    // Selection Sort Logic
+    
 
     //Printing Sorted Array
     printf("\nDo You Want To Print Sorted Array:-\n");
