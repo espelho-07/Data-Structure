@@ -29,6 +29,11 @@ int main()
     
 
     // Selection Sort Logic
+    for (int i = 0; i < N; i++)
+    {
+        
+    }
+    
     
 
     //Printing Sorted Array
